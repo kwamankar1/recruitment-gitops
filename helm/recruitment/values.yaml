@@ -1,0 +1,40 @@
+namespace: recruitment
+
+image:
+  registry: acrrecruitmentprod.azurecr.io
+  name: retail-recruitment
+  tag: "8"
+  pullPolicy: IfNotPresent
+
+api:
+  name: recruitment-api
+  replicaCount: 2
+  port: 3000
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+
+ui:
+  name: recruitment-ui
+  replicaCount: 2
+  port: 80
+  serviceType: LoadBalancer
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+config:
+  LOG_LEVEL: info
+  DB_HOST: recruitment-db
+
+secrets:
+  DB_USER: admin
+  DB_PASSWORD: password123

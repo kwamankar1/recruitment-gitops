@@ -1,0 +1,8 @@
+image:
+  tag: "9"
+
+api:
+  replicaCount: 3
+
+ui:
+  replicaCount: 3
