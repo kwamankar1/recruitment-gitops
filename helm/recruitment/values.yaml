@@ -3,7 +3,7 @@ namespace: recruitment
 image:
   registry: acrrecruitmentprod.azurecr.io
   name: retail-recruitment
-  tag: "8"
+  tag: "9"
   pullPolicy: IfNotPresent
 
 api:
@@ -31,10 +31,33 @@ ui:
       cpu: "200m"
       memory: "256Mi"
 
+# Application configuration (from .env)
 config:
   LOG_LEVEL: info
-  DB_HOST: recruitment-db
+  DB_HOST: mysql
+  DB_PORT: "3306"
+  DB_NAME: capsule_db
+  DB_USER: capsule_user
 
+# Application secrets (DEV ONLY)
 secrets:
-  DB_USER: admin
-  DB_PASSWORD: password123
+  DB_PASSWORD: secure_password_123
+
+# =========================
+# MySQL Database Configuration
+# =========================
+mysql:
+  name: mysql
+  image: mysql:8.0
+  port: 3306
+
+  database:
+    name: capsule_db
+    user: capsule_user
+    password: secure_password_123
+    rootPassword: rootpassword123
+
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: azure-disk-sc
